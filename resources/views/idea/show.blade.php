@@ -4,7 +4,7 @@
 
     {{-- Cards --}}
 
-    <livewire:idea-show :idea="$idea" :votesCount="$votesCount" /> 
+    <livewire:idea-show :idea="$idea" :votesCount="$votesCount" :spamsCount="$spamsCount"  /> 
 
     @can('update', $idea)
         {{-- <livewire:edit-idea :idea="$idea" /> --}}
@@ -15,9 +15,9 @@
 
     @endcan
    
-        <livewire:mark-idea-as-spam :idea="$idea" />
+        <livewire:mark-idea-as-spam :idea="$idea" :spamsCount="$spamsCount" />
 
-        <livewire:mark-idea-as-not-spam :idea="$idea" />
+        <livewire:mark-idea-as-not-spam :idea="$idea"  />
  
             
 

@@ -34,7 +34,7 @@
         />
     @empty
 
-    <p class="fw-bold text-danger">No Surveys were found...</p>
+    <p class="fw-bold text-red">No Polls were found...</p>
 
 
     @endforelse

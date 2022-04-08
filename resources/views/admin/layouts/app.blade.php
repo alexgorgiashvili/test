@@ -399,29 +399,29 @@
         <form action="{{ route('admin_search') }}" method="get" class="row my-3 gx-2">
             <div class="col-4">
               <div class="input-group">
-                <input type="search" name="search" class="form-control geo-input" id="geo_inp" ondragstart="return false;" ondrop="return false;" onpaste="return false" placeholder="Search anything...">  
+                <input type="search" name="search" class="form-control geo-input admin-search-inp" id="geo_inp" ondragstart="return false;" ondrop="return false;" onpaste="return false" placeholder="Search anything...">  
                   <button id="search-button" type="submit" class="btn btn-primary">
                     <i class="bi bi-search"></i>
                   </button>
                   <p class="tst-p"></p>
             </div>
             </div>
-            <div class="col-4 d-flex">
-              <select class="form-select me-1 cursor-pointer" name="top" aria-label="Default select example">
+            <div class="col-4 ">
+              <select class="form-select me-1 cursor-pointer admin-select-inp" name="top" aria-label="Default select example">
                 <option selected value="0">Select By</option>
                 <option value="1">Spams</option>
                 <option value="2">Votes</option>
                 </select>
             </div>
             <div class="col-4 d-flex">
-              <div class="w-50 ">
-                <div class=" input-group date datepicker  me-2 mb-2 mb-md-0">
-                    <input type="date" name="calendar" class=" form-control">
+              <div class="w-50 me-2">
+                <div class=" input-group date datepicker  p-0 ">
+                    <input type="date" name="calendar" class=" form-control admin-search-calendar">
                 </div>
             </div>
             <div class="w-50 ">
-              <div class=" input-group date datepicker me-2 mb-2 mb-md-0">
-                <input type="date" name="calendarTwo" class=" form-control">
+              <div class=" input-group date datepicker p-0">
+                <input type="date" name="calendarTwo" class=" form-control admin-search-calendar">
               </div>
             </div>
             </div>

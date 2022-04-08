@@ -64,7 +64,7 @@ class IdeasIndex extends Component
                 // ])
                 ->withCount('votes')
                 ->orderBy('id', 'desc')
-                ->simplePaginate(10)
+                ->simplePaginate(12)
                 ->withQueryString(),
     
         ]);

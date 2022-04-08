@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Auth;
 class AdminController extends Controller
 {
 
-    public function dashboard(Request $request)
+    public function dashboard()
     {
-        $ideas = Idea::orderBy('id', 'desc')->paginate(20);
+        $ideas = Idea::orderBy('id', 'desc')->paginate(20);      
         return view('admin.dashboard', compact('ideas'));
     }
 
-    public function admin_search(Request $request)
+    public function admin_search(Idea $idea ,Request $request)
     {
         $search = $request->search;
         $searchDate = $request->calendar;
@@ -147,6 +147,7 @@ class AdminController extends Controller
                 Vote::create([
                     'idea_id' => $idea->id,
                     'user_id' => $user->id,
+                    'type' => null
                 ]);
             }
         }else{
@@ -157,6 +158,7 @@ class AdminController extends Controller
                         'idea_id' => $idea->id,
                         'user_id' => $user->id,
                         'type' => 1
+                        
                     ]);
                 }
             }else if ($chooseVote == 2)
@@ -177,7 +179,7 @@ class AdminController extends Controller
 
         
         $ideas = Idea::where('id', $id)->firstOrFail();
-        $ideas->votes =+ $voteReq;
+        $ideas->votes+=$voteReq;
         $ideas->save();
         return redirect()->back();
     }

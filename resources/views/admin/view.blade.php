@@ -123,7 +123,7 @@
 
                     <div class="votes-div h-50 p-3">
                         <div class="d-flex flex-column justify-content-between h-100">
-                            <h6>{{ $idea->title }}  </h6>
+                            <h4>{{ $idea->title }}  </h4>
 
 
                            <div class="d-flex justify-content-between">
@@ -138,7 +138,7 @@
 
                 <div class="votes-div h-50 p-3">
                     <div class="d-flex flex-column justify-content-between h-100">
-                        <h6 class="mt-3">{{ $idea->title_second }}  </h6>
+                        <h4 class="mt-3">{{ $idea->title_second }}  </h4>
                         <div class="d-flex justify-content-between">
                             <b class="text-primary pt-2" >Votes:<span class="text-dark">{{ $voteTwo}}</span></b>
                         @if($idea->spam > 0)

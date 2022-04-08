@@ -481,7 +481,22 @@ background-color: var(--mblack);
     top: 1px;
   }
   .crd-title-a {
-      height:100px;
+    height:50px;
+    font-size: 17px !important;
+    font-weight: 800 !important;
+  }
+  #search-button {
+    border-radius: 3px;
+  }
+ min-search-inp {
+    padding: 11px 11px;
+  }
+  .admin-select-inp {
+    padding: 12px 10px;
+  }
+  .admin-search-calendar{
+    padding: 12px 12px;
+
   }
  
 

@@ -8,6 +8,7 @@ use App\Exceptions\VoteNotFoundException;
 use App\Exceptions\DuplicateVoteException;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Redirect;
 
 class Idea extends Model
 {
@@ -42,15 +43,42 @@ class Idea extends Model
     {
         return $this->belongsToMany(User::class, 'votes');
     }
+    public function spams()
+    {
+        return $this->belongsToMany(User::class, 'spams');
+    }
 
     public function status()
     {
         return $this->belongsTo(Status::class);
     }
 
+    public function spam(User $user)
+    {
 
+        $myvalue = Spam::where('idea_id', $this->id)->where('user_id', Auth::user()->id)->count(); 
+        if($myvalue == 0)
+        {
+            Spam::create([
+                'idea_id' => $this->id,
+                'user_id' => $user->id,
+            ]);
 
+        }
+       
+    
+        
+    }
 
+    public function isSpammedByUser(?User $user)
+    {
+        if(Auth::check())
+        {
+            return Spam::where('user_id', $user->id)
+                ->where('idea_id', $this->id)
+                ->exists();
+        }
+    }
 
     public function isVotedByUser(?User $user)
     {
@@ -176,7 +204,7 @@ class Idea extends Model
     {
         return Vote::where('user_id', $user->id)
             ->where('idea_id', $this->id)
-            ->where('type', 1)
+            ->where('type', 2)
             ->count();
     }
 

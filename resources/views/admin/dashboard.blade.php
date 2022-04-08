@@ -13,20 +13,16 @@
         </div>
         <div class=" col-8 col-lg-12 p-2 p-sm-4 d-flex flex-column position-static crd-body">
             <a href="{{ route('admin_view',$idea) }}" class="mb-0 fw-bold text-dark text-decoration-none crd-title-a">{{ $idea->title }}</a>
-            <div class="d-flex justify-content-between">
-                <div class="votes-div">
-                    <div class="d-flex justify-content-between">
-                    </div>
-                </div>
-            </div>
             <p class="card-text crd-text  pt-3 mb-auto" >{{ $idea->description }}</p>
             <div class="d-flex justify-content-between mt-4">
                 <ul class="ps-0 mb-0 comment-ul">
+                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spam }}</li>
+                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes()->count() }}</li>
                     <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
                     <li class="list-unstyled text-secondary pe-4">{{  date('F d, Y', strtotime($idea->date)) }}</li>
                     
                 </ul>
-                <div>
+                <div class="mt-auto">
                     <a href="{{ route('admin_view',$idea) }}" class="btn btn-dark ">Open</a>
                 </div>
             </div>
@@ -52,30 +48,18 @@
         </div>
         <div class=" col-8 col-lg-12 p-2 p-sm-4 d-flex flex-column position-static crd-body">
             <a href="{{ route('admin_view',$idea) }}" class="mb-0 fw-bold text-dark text-decoration-none crd-title-a">{{ $idea->title }} vs {{ $idea->title_second }}</a>
-            <div class="d-flex justify-content-between">
-                <div class="votes-div">
-                    
-                    <div class="d-flex justify-content-between">
-                        
-                    </div>
-                </div>
-                <div class="votes-div">
-                    
-                    <div class="d-flex justify-content-between">
-                        
-                    </div>
-                </div>
-            </div>
             <p class="card-text crd-text  pt-3 mb-auto" >{{ $idea->description }}</p>
             
             
             <div class="d-flex justify-content-between mt-4">
                 <ul class="ps-0 mb-0 comment-ul">
+                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spam }}</li>
+                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes()->count() }}</li>
                     <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
                     <li class="list-unstyled text-secondary pe-4">{{  date('F d, Y', strtotime($idea->date)) }}</li>
                     
                 </ul>
-                <div>
+                <div class="mt-auto">
                     <a href="{{ route('admin_view',$idea) }}" class="btn btn-dark ">Open</a>
                 </div>
             </div>

@@ -161,10 +161,14 @@ class IdeaController extends Controller
     {
        $votesCount1 = Vote::where('type',  '1')->count();
        $votesCount2 = Vote::where('type',  '2')->count();
+    //    $test1 = $idea->votes()->count();
+    //    $test2 = $idea->spams()->count();
+    //    dd($test2);
         return view('idea.show', [
             
             'idea' => $idea,
             'votesCount' => $idea->votes()->count(),
+            'spamsCount' => $idea->spams()->count(),
             'votesCount1' => $votesCount1,
             'votesCount2' => $votesCount2,
         ]);

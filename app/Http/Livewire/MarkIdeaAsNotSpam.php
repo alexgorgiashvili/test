@@ -13,9 +13,6 @@ class MarkIdeaAsNotSpam extends Component
     }
 
     public function markAsNotSpam(){
-        if (auth()->guest() || ! auth()->user()->isAdmin()){
-            abort(403);
-        }
 
         $this->idea->spam = 0;
         $this->idea->save();
@@ -29,3 +26,4 @@ class MarkIdeaAsNotSpam extends Component
         return view('livewire.mark-idea-as-not-spam');
     }
 }
+

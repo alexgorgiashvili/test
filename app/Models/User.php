@@ -50,6 +50,10 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Idea::class, 'votes');
     }
+    public function spams()
+    {
+        return $this->belongsToMany(Idea::class, 'spams');
+    }
 
     
 
@@ -57,6 +61,7 @@ class User extends Authenticatable
     {
         return in_array($this->email, [
             'req@admin.com',
+            'alexgorgiashvili@gmail.com'
             
         ]);
     }

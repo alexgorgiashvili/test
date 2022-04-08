@@ -24,10 +24,10 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
   Route::get('/admin_search',[AdminController::class,'admin_search'])->name('admin_search');
   Route::get('/admin/view/{id}',[AdminController::class,'view'])->name('admin_view');
   Route::get('/admin/addVotes/{id}',[AdminController::class,'addVotes'])->name('admin_addVotes');
-
-
-
-  });
+  
+  
+  
+});
 
 
 

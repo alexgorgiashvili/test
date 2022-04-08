@@ -1,5 +1,6 @@
 @if($idea->idea_type == 1)
-<div class="show-ideas-container">
+<div class="show-ideas-container"
+>
 
     <div class="col">
         <div class="row g-0 border rounded  flex-lg-row mb-4 shadow-sm h-md-250 position-relative">
@@ -27,9 +28,9 @@
 
                 <p class="card-text crd-text pt-3 mb-auto">{{ $idea->description }}</p>
 
-                @if($idea->spam > 0)
+                @if($spam > 0)
 
-                    <p class="text-danger bounceInDown">Spam Reports:{{ $idea->spam }}</p>
+                    <p class="text-danger bounceInDown">Spam Reports:{{ $spam }}</p>
 
                 @endif
 
@@ -76,17 +77,32 @@
                                 <button class="btn bg-black text-white dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     Menu
                                 </button>
-                                <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1">
+                                <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1" x-data>
                                     @can('delete', $idea)
                                     <li class="dropdown-item"><button class=" btn"
                                         @click="$dispatch('custom-show-delete-modal')"
                                         >Delete</button>
                                     </li>
                                     @endcan
-                                    <li class="dropdown-item"><button class=" btn"
-                                        @click="$dispatch('custom-show-spam-modal')"
-                                        >Mark As Spam</button>
-                                    </li>
+                                    @if($hasSpammed == false)
+                                        @if($myspam == 0)
+                                        <li class="dropdown-item"><button class=" btn"
+                                            @click="$dispatch('custom-show-spam-modal')"
+                                            x-cloak
+                                            x-data="{ isOpen: true }"
+                                            x-show="isOpen"
+                                            @keydown.escape.window="isOpen = false"
+                                            @custom-show-spam-modal.window="isOpen = true"
+                                            x-transition.origin.bottom.duration.300ms
+                                            x-init="
+                                                window.livewire.on('ideaWasSpamed',() => {
+                                                    isOpen = false
+                                                })
+                                            "
+                                            >Mark As Spam</button>
+                                        </li>
+                                        @endif
+                                    @endif
                                     @admin
                                     <li class="dropdown-item"><button class=" btn"
                                         @click="$dispatch('custom-show-clear-spam-modal')"
@@ -147,7 +163,7 @@
 
                     </div>
                 @if($hasVotedOne || $hasVotedTwo)
-
+                    <p class="mb-1 ps-2 text-black">Votes: {{ $val1 }}</p>
                     <div class="progress mx-1 ">
                         @if($votesCount == 0)
                         <p class="text-black mx-auto">No Votes </p>
@@ -156,15 +172,12 @@
                         <div class="progress-bar bg-red progress-bar-striped" role="progressbar" style="width: {{ $myval2 }}%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">{{ $myval2 }}%</div>
                         @endif
                     </div>
-                    <div class="d-flex justify-content-between px-2">
-                        <p>Vote: {{ $val1 }}</p>
-                        <p>Vote: {{ $val2 }}</p>
-                    </div>
+                    <p class="mt-1 ps-2 text-black mb-0">Votes: {{ $val2 }}</p>
                 @endif
 
                 <div class="votes-div h-50 p-3">
                     <div class="d-flex flex-column justify-content-between h-100">
-                        <h6 class="mt-3">{{ $idea->title_second }}  </h6>
+                        <h6 class="">{{ $idea->title_second }}  </h6>
                         <div class="d-flex justify-content-between">
 
 
@@ -182,9 +195,11 @@
                             </div>
                             @endif
 
-                        @if($idea->spam > 0)
-                        <span class="text-danger pt-1">Spam Reports:{{ $idea->spam }}</span>
-                        @endif
+                            @if($spam > 0)
+
+                            <p class="text-danger bounceInDown">Spam Reports:{{ $spam }}</p>
+        
+                            @endif
 
                     </div>
                 </div>
@@ -215,17 +230,32 @@
                                     <button class="btn bg-black text-white dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                         Menu
                                     </button>
-                                    <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1">
+                                    <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1" x-data>
                                         @can('delete', $idea)
                                         <li class="dropdown-item"><button class=" btn"
                                             @click="$dispatch('custom-show-delete-modal')"
                                             >Delete</button>
                                         </li>
                                         @endcan
+                                        @if($hasSpammed == false)
+                                        @if($myspam == 0)
                                         <li class="dropdown-item"><button class=" btn"
                                             @click="$dispatch('custom-show-spam-modal')"
+                                            x-cloak
+                                            x-data="{ isOpen: true }"
+                                            x-show="isOpen"
+                                            @keydown.escape.window="isOpen = false"
+                                            @custom-show-spam-modal.window="isOpen = true"
+                                            x-transition.origin.bottom.duration.300ms
+                                            x-init="
+                                                window.livewire.on('ideaWasSpamed',() => {
+                                                    isOpen = false
+                                                })
+                                            "
                                             >Mark As Spam</button>
                                         </li>
+                                        @endif
+                                    @endif
                                         @admin
                                         <li class="dropdown-item"><button class=" btn"
                                             @click="$dispatch('custom-show-clear-spam-modal')"

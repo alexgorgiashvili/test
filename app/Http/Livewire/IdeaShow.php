@@ -8,10 +8,16 @@ use App\Models\Status;
 use Livewire\Component;
 use App\Exceptions\VoteNotFoundException;
 use App\Exceptions\DuplicateVoteException;
+use App\Models\Spam;
+use Illuminate\Support\Facades\Auth;
+
 
 class IdeaShow extends Component
 {
     public $idea;
+    public $spamsCount;
+    public $hasSpammed;
+
     public $votesCount;
     public $votesCount1;
     public $votesCount2;
@@ -21,6 +27,7 @@ class IdeaShow extends Component
     public $votesCountOne;
     public $votesCountTwo;
     public $status;
+    
 
     protected $listeners = ['ideaWasUpdated','ideaWasSpamed','ideaSpamCleared'];
 
@@ -30,10 +37,16 @@ class IdeaShow extends Component
 
         $this->idea = $idea;
         $this->votesCount = $votesCount;
+        $this->hasSpammed = $idea->isSpammedByUser(auth()->user());
+
         $this->hasVoted = $idea->isVotedByUser(auth()->user());
+        
+
         $this->hasVotedOne = $idea->isVotedOne(auth()->user());
         $this->hasVotedTwo = $idea->isVotedTwo(auth()->user());
+       
     }
+
 
 
     public function ideaWasUpdated()
@@ -48,8 +61,9 @@ class IdeaShow extends Component
     {
         $this->idea->refresh();
     }
+   
 
-
+   
     public function voteOne()
     {
         if (! auth()->check()) {
@@ -122,9 +136,14 @@ class IdeaShow extends Component
     public function render()
     {
 
+        $spam = Spam::where('idea_id', $this->idea->id)->count();
+        $myspam = Spam::where('idea_id', $this->id)->where('user_id', Auth::user()->id)->count(); 
+
         $val1 = Vote::where('idea_id', $this->idea->id)->where('type', '1')->count();
         $val2 = Vote::where('idea_id', $this->idea->id)->where('type', '2')->count();
 
+        $hasSpammed = $this->hasSpammed;
+        
         $val3 = $val1;
         $val4 = $val2;
         $myval = "";
@@ -133,7 +152,8 @@ class IdeaShow extends Component
         {
             $myval = 0;
             $myval2 = 0;
-            return view('livewire.idea-show', compact('val1', 'val2', 'myval', 'myval2'));
+            return view('livewire.idea-show', compact('val1', 'val2', 'myval', 'myval2', 'spam', 'hasSpammed', 'myspam'));
+            
         }
         else
         {
@@ -141,7 +161,7 @@ class IdeaShow extends Component
             $myval2 = 100 - $myval;
             $myval = round($myval, 1);
             $myval2 = round($myval2, 1);
-            return view('livewire.idea-show', compact('val1', 'val2', 'myval', 'myval2'));
+            return view('livewire.idea-show', compact('val1', 'val2', 'myval', 'myval2', 'spam', 'hasSpammed', 'myspam'));
         }
 
     }

@@ -21,7 +21,7 @@ class CreateIdeasTable extends Migration
             $table->string('title_second')->nullable();
             $table->string('image');
             $table->string('image_second')->nullable();
-            $table->string('spam')->default(0);
+            $table->string('spams')->default(0);
             $table->string('hide_name')->nullable();
             $table->integer('idea_type')->nullable();
             $table->string('slug')->nullable();
