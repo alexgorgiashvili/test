@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class StatusFactory extends Factory
+class SpamFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +14,8 @@ class StatusFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->title('Open'|'Closed') ,
-
+            'idea_id' => $this->faker->numberBetween(1, 100),
+            'user_id' => $this->faker->numberBetween(1, 20)
         ];
     }
 }

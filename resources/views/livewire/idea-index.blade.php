@@ -1,9 +1,9 @@
 @if($idea->idea_type == 1)
-<div class="col-lg-4 crd">
+<div class="col-lg-4 crd" onclick="location.href='{{ route('idea.show',$idea) }}';" style="cursor: pointer;">
     <div class="row crd-row g-0 border rounded overflow-hidden flex-lg-column flex-row mb-4 shadow-sm h-md-250 ">
         <div class="  col-4  col-lg-12 crd-head">
             <div class="h-100 d-flex">
-                <a class="w-100" href="{{ url('storage/images',$idea->image ) }}"data-lightbox="image-{{ $idea->id }}" >
+                <a class="w-100" href="{{ route('idea.show',$idea) }}" >
                     <img class='index-image w-100 'src="{{ url('storage/images',$idea->image ) }}" alt="">
                 </a>
             </div>
@@ -16,16 +16,7 @@
                     </div>
                 </div>
             </div>
-            <p class="card-text crd-text  pt-3 mb-auto" >{{ $idea->description }}</p>
-            <div class="d-flex justify-content-between mt-4">
-                <ul class="ps-0 mb-0 comment-ul">
-                    <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
-                    
-                </ul>
-                <div>
-                    <a href="{{ route('idea.show',$idea) }}" class="btn btn-dark ">Open</a>
-                </div>
-            </div>
+
         </div>
         
     </div>
@@ -34,14 +25,14 @@
 
 
 @if($idea->idea_type == 2)
-<div class="col-lg-4 crd">
+<div class="col-lg-4 crd" onclick="location.href='{{ route('idea.show',$idea) }}';" style="cursor: pointer;">
     <div class="row crd-row g-0 border rounded overflow-hidden flex-lg-column flex-row mb-4 shadow-sm h-md-250 position-relative">
         <div class="  col-4  col-lg-12 crd-head position-relative">
             <div class="h-100 d-flex img_vs">
-                <a class="w-50 img-border-left" href="{{ url('storage/images',$idea->image ) }}"data-lightbox="image-{{ $idea->id }}" >
+                <a class="w-50 img-border-left" href="{{ route('idea.show',$idea) }}" >
                     <img class='index-image w-100 ' src="{{ url('storage/images',$idea->image ) }}" alt="">
                 </a>
-                <a class="w-50 img-border-right" href="{{ url('storage/images',$idea->image_second ) }}"data-lightbox="image-{{ $idea->id }}" >
+                <a class="w-50 img-border-right" href="{{ route('idea.show',$idea) }}" >
                     <img class='index-image w-100 ' src="{{ url('storage/images',$idea->image_second ) }}" alt="">
                 </a>
             </div>
@@ -60,18 +51,6 @@
                     <div class="d-flex justify-content-between">
                         
                     </div>
-                </div>
-            </div>
-            <p class="card-text crd-text  pt-3 mb-auto" >{{ $idea->description }}</p>
-            
-            
-            <div class="d-flex justify-content-between mt-4">
-                <ul class="ps-0 mb-0 comment-ul">
-                    <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
-                    
-                </ul>
-                <div>
-                    <a href="{{ route('idea.show',$idea) }}" class="btn btn-dark ">Open</a>
                 </div>
             </div>
         </div>

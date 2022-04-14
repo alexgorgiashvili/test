@@ -20,7 +20,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link href="{{ asset('css/lightbox.css') }}"  rel="stylesheet" />
-
+    
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @livewireStyles
 </head>
@@ -31,8 +31,8 @@
     
     
     {{-- Navbar --}}
-<div id="app">
-    <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+    <div id="app">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="{{ asset('img/pitalo.png') }}" alt="pitaloimg" srcset="" class="img-responsive">
@@ -42,11 +42,22 @@
                 </button>
                 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-
+                    
                     <ul class="navbar-nav ms-auto">
+                        
+                        <li class="nav-item d-flex ">
+                            
+                            @auth
+                            @if(Auth::user()->user_type == 1)
+                            <a class="nav-link btn bg-red text-white top-nav-btns" href="{{ route('admin_polls') }}">პანელში გადასვლა</a>
+                            @endif
+                            <a class="nav-link btn bg-black text-white top-nav-btns mx-1" href="{{ route('idea.create') }}">{{ __('გამოკითხვის დამატება') }}</a>
+                            @endauth
+                            
+                        </li>
                         @guest
                         <li class="nav-item me-2 " x-data>
-                            <button @click=$dispatch('custom-show-signform') type="button" class="btn sign-btn w-100 w-sm-100 w-md-auto "><i class="bi bi-person-circle person-bef "></i></button>
+                            <button @click=$dispatch('custom-show-signform') type="button" class="btn sign-btn w-100 w-sm-100 w-md-auto p-3">გაიარეთ ავტორიზაცია <i class="bi bi-person-circle person-bef "></i></button>
                         </li>
                         @else
                         <li class="nav-item dropdown d-flex">
@@ -59,23 +70,20 @@
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                                </a>
+                                {{ __('გამოსვლა') }}
+                            </a>
                             
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
                         @endguest
-                        <li class="nav-item ">
-                            <a class="nav-link btn bg-black text-white" href="{{ route('idea.create') }}">{{ __('Add') }}</a>
-                        </li>
-                    </ul>
+                </ul>
                 
-            
-                </div>
+                
             </div>
+        </div>
         
     </nav>
     {{--  Body --}}
@@ -96,38 +104,38 @@
                             aria-expanded="false"
                             aria-controls="collapseOne"
                             >
-                            Top Voted
-                            </button>
-                        </h2>
-                    </div>
-                    <div id="collapseOne" class="accordion-collapse collapse show hide-area" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                        <div class="accordion-body p-0">
-                            <table class="table caption-top">
-                                <tbody class="vote-body">
-                                    @foreach ($ideas as $idea )
-                                    <tr class="position-relative  border-0">
-                                        <th class="px-0 ps-1 border-0"><img src="{{ url('storage/images',$idea->image ) }} " class="img-responsive" alt=""></th>
-                                        <td class="vote-td border-0"><a href="{{ route('idea.show',$idea) }}" class="text-secondary text-decoration-none">{{ $idea->title}}</a></td>
-                                        <td class="vote-num fw-bold text-danger px-0 border-0">{{ $idea->votes()->count() }}</td>
-                                        
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    
+                            პოპულარული გამოკითხვები
+                        </button>
+                    </h2>
                 </div>
-            </div>
-            <div class="col-md-9 ">
+                <div id="collapseOne" class="accordion-collapse collapse show hide-area" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body p-0">
+                        <table class="table caption-top">
+                            <tbody class="vote-body">
+                                @foreach ($ideas as $idea )
+                                <tr class="position-relative  border-0">
+                                    <th class="px-0 ps-1 border-0"><img src="{{ url('storage/images',$idea->image ) }} " class="img-responsive" alt=""></th>
+                                    <td class="vote-td border-0"><a href="{{ route('idea.show',$idea) }}" class="text-secondary text-decoration-none">{{ $idea->title}}</a></td>
+                                    <td class="vote-num fw-bold text-danger px-0 border-0">{{ $idea->votes()->count() }}</td>
+                                    
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
                 
-                <div class="">
-                    {{ $slot }}
-                </div>
             </div>
-            
         </div>
-    </div>  
+        <div class="col-md-9 ">
+            
+            <div class="">
+                {{ $slot }}
+            </div>
+        </div>
+        
+    </div>
+</div>  
 </div>
 
 

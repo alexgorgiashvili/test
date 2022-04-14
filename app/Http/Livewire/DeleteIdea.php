@@ -20,9 +20,7 @@ class DeleteIdea extends Component
 
     public function deleteIdea()
     {
-        if (auth()->guest() || auth()->user()->cannot('delete', $this->idea)) {
-            abort(403);
-        }
+  
         Vote::where('idea_id', $this->idea->id)->delete();
         $path = $this->idea->image;
         $destination = 'storage/images/'.$path;

@@ -1,20 +1,20 @@
 <div class="row gy-2 pt-lg-0 pt-3">
 
-    <div class="filters d-flex  w-75 ">
+    <div class="filters d-flex  w-100 ">
 
-        <div class="col-md-3">
+        <div>
             <select wire:model='filter'  name="other_filters" class="form-select no-focus " aria-label="Default select example">
 
-                <option value="no Filter" selected>No Filter</option>
-                <option value="Top Voted">top Voted</option>
-                <option value="My Surveys">My Surveys</option>
+                <option value="no Filter" selected></option>
+                <option value="Top Voted">პოპულარული გამოკითხვები</option>
+                <option value="My Surveys">ჩემი გამოკითხვები</option>
                 @admin
-                <option value="Spam Surveys">Spamed Surveys</option>
+                <option value="Spam Surveys">დარეპორტებული გამოკითხვები</option>
                 @endadmin
 
               </select>
         </div>
-        <div class="input-group mb-3 col ms-3 " style="width: 100px">
+        <div class="input-group mb-3 col ms-5 " style="width: 100px">
             <span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span>
             <input wire:model="search" type="search" name="search" class="form-control no-focus w-50"   aria-describedby="basic-addon1">
         </div>
@@ -34,7 +34,7 @@
         />
     @empty
 
-    <p class="fw-bold text-red">No Polls were found...</p>
+    <p class="fw-bold text-red">გამოკითხვები ვერ მოიძებნა...</p>
 
 
     @endforelse

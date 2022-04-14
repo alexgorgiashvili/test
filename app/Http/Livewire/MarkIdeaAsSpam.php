@@ -14,11 +14,9 @@ class MarkIdeaAsSpam extends Component
     public $spamsCount;
 
                   
-    public function mount(Idea $idea,$spamsCount)
+    public function mount(Idea $idea)
     {
         $this->idea = $idea;
-        $this->spamsCount = $spamsCount;
-
     }
    
 
@@ -31,8 +29,6 @@ class MarkIdeaAsSpam extends Component
 
 
              $this->emit('ideaWasSpamed');
-             return redirect()->back();
-
     }
    
     // public function render()

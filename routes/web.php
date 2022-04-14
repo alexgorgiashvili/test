@@ -20,10 +20,18 @@ Route::patch('/update_two/{id}', [IdeaController::class, 'update_two'])->name('u
 // admin routes
 
 Route::middleware(['auth', 'isAdmin'])->group(function () {
-  Route::get('/admin',[AdminController::class,'dashboard'])->name('admin_dashboard');
+  Route::get('/admin',[AdminController::class,'polls'])->name('admin_polls');
+  Route::get('/admin/dashboard',[AdminController::class,'dashboard'])->name('admin_dashboard');
   Route::get('/admin_search',[AdminController::class,'admin_search'])->name('admin_search');
   Route::get('/admin/view/{id}',[AdminController::class,'view'])->name('admin_view');
   Route::get('/admin/addVotes/{id}',[AdminController::class,'addVotes'])->name('admin_addVotes');
+  Route::get('/admin/delete{id}',[AdminController::class,'delete'])->name('admin_delete');
+  Route::get('/admin/edit{id}',[AdminController::class,'edit'])->name('admin_edit');
+  Route::patch('/admin/update_one{id}',[AdminController::class,'admin_update_one'])->name('admin_update_one');
+  Route::patch('/admin/update_two{id}',[AdminController::class,'admin_update_two'])->name('admin_update_two');
+  Route::get('/admin/clearSpams{id}',[AdminController::class,'clearSpams'])->name('admin_clear_spams');
+
+
   
   
   

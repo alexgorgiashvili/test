@@ -16,6 +16,7 @@ class IdeaFactory extends Factory
     {
         return [
             'user_id' => $this->faker->numberBetween(1,20),
+            // 'status_id' => $this->faker->numberBetween(1,20),
             'description' => $this->faker->text(100),
             'title' => ucwords($this->faker->words(2,true)),
             'image' => 'logo.png'

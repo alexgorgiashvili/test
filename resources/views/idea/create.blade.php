@@ -103,26 +103,6 @@
     @guest
     <p>ჯერ გაიარეთ რეგისტრაცია.</p>
     @endguest
-    {{-- <script type="module">
-        import GeoKBD from 'https://cdn.skypack.dev/geokbd.js';
-        let targetElement = document.querySelectorAll('[type="text"]');;
-        let targetElement2 = document.getElementById("geo_inp2");
-        let targetElement3 = document.getElementById("geo_inp3");
-        let targetElement4 = document.getElementById("geo_inp4");
-        let targetElement5 = document.getElementById("geo_inp5");
-        let targetElement6 = document.getElementById("geo_inp6");
-        let targetElement7 = document.getElementById("geo_inp7");
-    
-    
-        GeoKBD.initialize();
-        GeoKBD.attach(targetElement);
-        // GeoKBD.attach(targetElement2);
-        // GeoKBD.attach(targetElement3);
-        // GeoKBD.attach(targetElement4);
-        // GeoKBD.attach(targetElement5);
-        // GeoKBD.attach(targetElement6);
-        // GeoKBD.attach(targetElement7);
-    </script> --}}
     
     
     

@@ -14,11 +14,11 @@
             <div class="col-8 p-2 p-sm-4 d-flex flex-column position-relative crd-body">
                 @if ($status->name == 'Open')
                 <div class='position-absolute status-btn'>
-                    <button class="btn btn-success rounded-pill disabled">{{ $status->name }}</button>
+                    <button class="btn btn-success rounded-pill disabled">აქტიური</button>
                 </div>
                 @else
                 <div class='position-absolute status-btn'>
-                    <button class="btn btn-danger rounded-pill disabled">{{ $status->name }}</button>
+                    <button class="btn btn-danger rounded-pill disabled">დასრულებული</button>
                 </div>
                 @endif
                 
@@ -35,19 +35,21 @@
                 @endif
 
                 <div class="votes-div">
-                    <p class=" m-0 py-2 fw-bold @if  ( $hasVoted )  text-red @endif"> {{ $votesCount }}</p>
+                    {{-- <p class=" m-0 py-2 fw-bold @if  ( $hasVoted )  text-red @endif"> {{ $val1 }}</p>
+                    <p class=" m-0 py-2 fw-bold @if  ( $hasVoted )  text-red @endif"> {{ $val2 }}</p> --}}
                     @if ($status->name == 'Open')
                         @if ($hasVoted)
-                        <button wire:click.prevent='vote' type="button" class="btn bg-red text-light" >Voted</button>
+                         <p class=" m-0 py-2 fw-bold @if  ( $hasVoted )  text-red @endif"><b class="text-black">პიტალოა</b>-{{ $val1 }}</p>
+                         <p class=" m-0 py-2 fw-bold @if  ( $hasVoted )  text-red @endif"><b class="text-black">ოქროა</b>-{{ $val2 }}</p>
                         @else
-                        <button wire:click.prevent='vote' type="button" class="btn btn-secondary" >Vote</button>
+                        <button wire:click="voteYes" type="button" class="btn btn-success" >კი,პიტალოა</button>
+                        <button wire:click="voteNo" type="button" class="btn btn-danger" >არა,არ არის პიტალო</button>
+
+
+
                         @endif
                     @else
-                        @if ($hasVoted)
-                        <button wire:click.prevent='vote' type="button" class="btn bg-red text-light disabled" >Voted</button>
-                        @else
-                        <button wire:click.prevent='vote' type="button" class="btn btn-secondary disabled" >Vote</button>
-                        @endif
+                   
                     @endif
 
 
@@ -72,41 +74,37 @@
                         @can('update', $idea)
                         <a href="{{ route('edit_idea',$idea->id) }}"
                             class="btn btn-secondary">Edit</a>
-                            @endcan
-                            <div class="dropdown ms-1">
-                                <button class="btn bg-black text-white dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Menu
+                        @endcan
+                            <div class="dropdown ms-1 @if($hasSpammed)d-none @endif"x-data>
+                                <button
+                                x-cloak
+                                 x-data="{ isOpen: true }"
+                                 x-show="isOpen"
+                                 x-init="
+                                     window.livewire.on('ideaWasSpamed',() => {
+                                         isOpen = false
+                                     })
+                                 "
+                                class="btn bg-black text-white dropdown-toggle " type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                    მენიუ
                                 </button>
-                                <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1" x-data>
+                                <ul class="dropdown-menu spam-dropdown " aria-labelledby="dropdownMenuButton1">
+                                
                                     @can('delete', $idea)
-                                    <li class="dropdown-item"><button class=" btn"
-                                        @click="$dispatch('custom-show-delete-modal')"
-                                        >Delete</button>
+                                    <li class="dropdown-item">
+                                        <button class=" btn"@click="$dispatch('custom-show-delete-modal')">Delete</button>
                                     </li>
                                     @endcan
                                     @if($hasSpammed == false)
-                                        @if($myspam == 0)
-                                        <li class="dropdown-item"><button class=" btn"
-                                            @click="$dispatch('custom-show-spam-modal')"
-                                            x-cloak
-                                            x-data="{ isOpen: true }"
-                                            x-show="isOpen"
-                                            @keydown.escape.window="isOpen = false"
-                                            @custom-show-spam-modal.window="isOpen = true"
-                                            x-transition.origin.bottom.duration.300ms
-                                            x-init="
-                                                window.livewire.on('ideaWasSpamed',() => {
-                                                    isOpen = false
-                                                })
-                                            "
-                                            >Mark As Spam</button>
+                                        
+                                        <li class="dropdown-item">
+                                            <button class=" btn"@click="$dispatch('custom-show-spam-modal')">დარეპორტება</button>
                                         </li>
-                                        @endif
+                                       
                                     @endif
                                     @admin
-                                    <li class="dropdown-item"><button class=" btn"
-                                        @click="$dispatch('custom-show-clear-spam-modal')"
-                                        >Clear Spam</button>
+                                    <li class="dropdown-item">
+                                        <button class=" btn"@click="$dispatch('custom-show-clear-spam-modal')">Clear Spam</button>
                                     </li>
                                     @endadmin
                                 </ul>
@@ -226,11 +224,20 @@
                                 @endcan
 
 
-                                <div class="dropdown ms-1">
-                                    <button class="btn bg-black text-white dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Menu
+                                <div class="dropdown ms-1 @if($hasSpammed) d-none @endif"x-data>
+                                    <button 
+                                    x-cloak
+                                    x-data="{ isOpen: true }"
+                                    x-show="isOpen"
+                                    x-init="
+                                        window.livewire.on('ideaWasSpamed',() => {
+                                            isOpen = false
+                                        })
+                                    "
+                                    class="btn bg-black text-white dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                                        მენიუ
                                     </button>
-                                    <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1" x-data>
+                                    <ul class="dropdown-menu spam-dropdown" aria-labelledby="dropdownMenuButton1" >
                                         @can('delete', $idea)
                                         <li class="dropdown-item"><button class=" btn"
                                             @click="$dispatch('custom-show-delete-modal')"
@@ -238,24 +245,23 @@
                                         </li>
                                         @endcan
                                         @if($hasSpammed == false)
-                                        @if($myspam == 0)
-                                        <li class="dropdown-item"><button class=" btn"
-                                            @click="$dispatch('custom-show-spam-modal')"
+                                       
+                                        <li class="dropdown-item"
                                             x-cloak
                                             x-data="{ isOpen: true }"
                                             x-show="isOpen"
-                                            @keydown.escape.window="isOpen = false"
-                                            @custom-show-spam-modal.window="isOpen = true"
-                                            x-transition.origin.bottom.duration.300ms
                                             x-init="
                                                 window.livewire.on('ideaWasSpamed',() => {
                                                     isOpen = false
                                                 })
                                             "
-                                            >Mark As Spam</button>
+                                        ><button class=" btn"
+                                            @click="$dispatch('custom-show-spam-modal')"
+                                            
+                                            >დარეპორტება</button>
                                         </li>
+                                        
                                         @endif
-                                    @endif
                                         @admin
                                         <li class="dropdown-item"><button class=" btn"
                                             @click="$dispatch('custom-show-clear-spam-modal')"
