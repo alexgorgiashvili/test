@@ -99,13 +99,30 @@ class IdeaController extends Controller
         //     'imagetwo' => 'required|image|mimes:jpg,jpeg,png,gif,svg|max:3072',
         // ]);
 
-        $ident = Idea::where('title', '=', $request->title1)->first();
+        // $ident = Idea::where('title',  $request->title)
+        //               ->where('title_second',$request->titletwo)
+        //               ->first();
+        $ident = Idea::where([
+            'title' =>  $request->title,
+            'title_second' => $request->titletwo
+        ])->orWhere([
+            'title' =>  $request->titletwo,
+            'title_second' => $request->title
+        ])->first();
+
+        $identTwo =Idea::where('title', '=', $request->title2)->first();
+        $identThree = Idea::where('title_second', '=', $request->title1)->first();
 
         if($ident){
+           
             $id = $ident->slug;
             return redirect()->route('idea.show', $id);
         }
-        // dd($request);
+        // if($identThree && $identTwo){
+        //     $id = $ident->slug;
+        //     return redirect()->route('idea.show', $id);
+        // }
+        // // dd($request);
         $imageone = $request->image;
         $name = $imageone->getClientOriginalName();
         $input['image'] = time().'.'.$name;

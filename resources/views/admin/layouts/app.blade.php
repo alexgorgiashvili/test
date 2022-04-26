@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
+	<meta  charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="description" content="Responsive HTML Admin Dashboard Template based on Bootstrap 5">
@@ -43,7 +43,7 @@
         <div class="sidebar-toggler not-active">
           <span></span>
           <span></span>
-          <span></span>
+          <span></span>                                           
         </div>
       </div>
       <div class="sidebar-body">
@@ -136,16 +136,29 @@
 	<!-- End plugin js for this page -->
 
 	<!-- inject:js -->
-	<script src="{{ asset('/adminpanel/vendors/feather-icons/feather.min.js') }}"></script>
+	<script src="{{ asset('/adminpanel/vendors/feat her-icons/feather.min.js') }}"></script>
 	<script src="{{ asset('/adminpanel/js/template.js') }}"></script>
 	<!-- endinject -->
 
-  <script src="{{ asset('/adminpanel/js/dashboard-dark.js') }}"></script>
+
+ 
 
   {{-- Data table js  --}}
   <script src="{{ asset('/adminpanel/vendors/datatables.net/jquery.dataTables.js') }}" ></script>
   <script src="{{ asset('/adminpanel/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
   <script src="{{ asset('/adminpanel/js/data-table.js') }}"></script>
+
+   <!-- Charting library -->
+{{-- <script src="https://unpkg.com/chart.js@^2.9.3/dist/Chart.min.js"></script>
+<!-- Chartisan -->
+<script src="https://unpkg.com/@chartisan/chartjs@^2.1.0/dist/chartisan_chartjs.umd.js"></script> --}}
+
+ <script src="{{ asset('/adminpanel/js/dashboard-dark.js') }}"></script>
+ 
+
+  @stack('javascripts')
+
+
   <script type="module">
     import jqueryGeokbd from 'https://cdn.skypack.dev/jquery-geokbd';
     $(".geo-input").geokbd();

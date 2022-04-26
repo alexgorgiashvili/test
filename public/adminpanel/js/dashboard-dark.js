@@ -1,3 +1,4 @@
+
 $(function() {
   'use strict'
 
@@ -186,51 +187,47 @@ $(function() {
 
 
   // Date Picker
-  if($('#dashboardDate').length) {
-    var date = new Date();
-    var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-    $('#dashboardDate').datepicker({
-      format: "dd-MM-yyyy",
-      todayHighlight: true,
-      autoclose: true
-    });
-    $('#dashboardDate').datepicker('setDate', today);
-  }
+  
+
+    
+  
   // Date Picker - END
 
-
+  
 
 
 
   // New Customers Chart
-  if($('#customersChart').length) {
-    var options1 = {
-      chart: {
-        type: "line",
-        height: 60,
-        sparkline: {
-          enabled: !0
-        }
-      },
-      series: [{
-        name: '',
-        data: [3844, 3855, 3841, 3867, 3822, 3843, 3821, 3841, 3856, 3827, 3843]
-      }],
-      xaxis: {
-        type: 'datetime',
-        categories: ["Jan 01 2021", "Jan 02 2021", "Jan 03 2021", "Jan 04 2021", "Jan 05 2021", "Jan 06 2021", "Jan 07 2021", "Jan 08 2021", "Jan 09 2021", "Jan 10 2021", "Jan 11 2021",],
-      },
-      stroke: {
-        width: 2,
-        curve: "smooth"
-      },
-      markers: {
-        size: 0
-      },
-      colors: [colors.primary],
-    };
-    new ApexCharts(document.querySelector("#customersChart"),options1).render();
-  }
+  // if($('#customersChart').length) {
+
+    
+  //   var options1 = {
+  //     chart: {
+  //       type: "line",
+  //       height: 60,
+  //       sparkline: {
+  //         enabled: !0
+  //       }
+  //     },
+  //     series: [{
+  //       name: '',
+  //       data: [4550, 4580, 4590, 4623, 3822, 3843, 3821, 3841, 3856, 3827, 3843]
+  //     }],
+  //     xaxis: {
+  //       type: 'datetime',
+  //       categories: ["Jan 01 2021", "Jan 02 2021", "Jan 03 2021", "Jan 04 2021", "Jan 05 2021", "Jan 06 2021", "Jan 07 2021", "Jan 08 2021", "Jan 09 2021", "Jan 10 2021", "Jan 11 2021",],
+  //     },
+  //     stroke: {
+  //       width: 2,
+  //       curve: "smooth"
+  //     },
+  //     markers: {
+  //       size: 0
+  //     },
+  //     colors: [colors.primary],
+  //   };
+  //   new ApexCharts(document.querySelector("#customersChart"),options1).render();
+  // }
   // New Customers Chart - END
 
 

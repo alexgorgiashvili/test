@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Redirect;
 use App\Exceptions\VoteNotFoundException;
 use App\Exceptions\DuplicateVoteException;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Redirect;
 
 class Idea extends Model
 {
@@ -24,6 +25,21 @@ class Idea extends Model
     *
     * @return array
     */
+    public function created_at_difference()
+      {
+          $now = Carbon::now();
+          $created_days = Carbon::createFromTimestamp(strtotime($this->created_at))->diff($now)->days;
+          $daysLeft = 30 - $created_days ;
+          if($created_days <= 30)
+          {
+            return $daysLeft;
+          }
+          if($created_days > 30 )
+          {
+              return $created_days;
+          }
+        //    return Carbon::createFromTimestamp(strtotime($this->created_at))->diff(Carbon::now())->days ;
+      }         
     public function sluggable(): array
     {
         return [

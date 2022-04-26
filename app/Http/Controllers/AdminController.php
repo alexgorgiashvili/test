@@ -7,8 +7,10 @@ use App\Models\Spam;
 use App\Models\User;
 use App\Models\Vote;
 use App\Models\Status;
+use App\Charts\testChart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use App\Charts\MonthlyUsersChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
@@ -26,9 +28,26 @@ class AdminController extends Controller
     
     
     
-    public function dashboard(){
-        return view('admin.dashboard');
-    }
+    
+    public function dashboard(testChart $chart)
+    {
+        $month = Carbon::now()->month;
+        $currentMonth = Idea::whereMonth('created_at', now()->month)->count();
+        $sms = Idea::whereMonth('created_at', '=', Carbon::now()->month)->get();
+
+        // $tst = [];
+        //  foreach ($sms as $sm){
+        //     array_push($tst,$sm->count());
+        // }
+        // dd($tst);
+        
+        return view('admin.dashboard', [
+            
+            'chart' => $chart->build(),
+            'currentMonth' => $currentMonth
+            
+        ]);
+    } 
     
     
     
