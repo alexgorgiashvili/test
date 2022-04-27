@@ -234,33 +234,33 @@ $(function() {
 
 
   // Orders Chart
-  if($('#ordersChart').length) {
-    var options2 = {
-      chart: {
-        type: "bar",
-        height: 60,
-        sparkline: {
-          enabled: !0
-        }
-      },
-      plotOptions: {
-        bar: {
-          borderRadius: 2,
-          columnWidth: "60%"
-        }
-      },
-      colors: [colors.primary],
-      series: [{
-        name: '',
-        data: [36, 77, 52, 90, 74, 35, 55, 23, 47, 10, 63]
-      }],
-      xaxis: {
-        type: 'datetime',
-        categories: ["Jan 01 2021", "Jan 02 2021", "Jan 03 2021", "Jan 04 2021", "Jan 05 2021", "Jan 06 2021", "Jan 07 2021", "Jan 08 2021", "Jan 09 2021", "Jan 10 2021", "Jan 11 2021",],
-      },
-    };
-    new ApexCharts(document.querySelector("#ordersChart"),options2).render();
-  }
+  // if($('#ordersChart').length) {
+  //   var options2 = {
+  //     chart: {
+  //       type: "bar",
+  //       height: 60,
+  //       sparkline: {
+  //         enabled: !0
+  //       }
+  //     },
+  //     plotOptions: {
+  //       bar: {
+  //         borderRadius: 2,
+  //         columnWidth: "60%"
+  //       }
+  //     },
+  //     colors: [colors.primary],
+  //     series: [{
+  //       name: '',
+  //       data: [36, 77, 52, 90, 74, 35, 55, 23, 47, 10, 63]
+  //     }],
+  //     xaxis: {
+  //       type: 'datetime',
+  //       categories: ["Jan 01 2021", "Jan 02 2021", "Jan 03 2021", "Jan 04 2021", "Jan 05 2021", "Jan 06 2021", "Jan 07 2021", "Jan 08 2021", "Jan 09 2021", "Jan 10 2021", "Jan 11 2021",],
+  //     },
+  //   };
+  //   new ApexCharts(document.querySelector("#ordersChart"),options2).render();
+  // }
   // Orders Chart - END
 
 
