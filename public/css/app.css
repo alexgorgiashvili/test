@@ -545,6 +545,12 @@ min-search-inp {
 .d-table-names{
     padding:10px 0px 12px 70px !important;
 }
+.yearChart{
+    display: none;
+}
+.mChartRow{
+    padding-right: 24px;
+}
 
 
 

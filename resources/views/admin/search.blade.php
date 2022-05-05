@@ -17,10 +17,10 @@
             <p class="card-text crd-text  pt-3 mb-auto" >{{ $idea->description }}</p>
             <div class="d-flex justify-content-between mt-4">
                 <ul class="ps-0 mb-0 comment-ul">
-                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spams()->count()}}</li>
-                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes()->count() }}</li>
+                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spams}}</li>
+                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes}}</li>
+                    <li class="list-unstyled text-secondary pe-4">Status: <span class="text-success @if($idea->status != 'Open') text-red @endif">{{  $idea->status }}</span> </li>
                     <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
-                    <li class="list-unstyled text-secondary pe-4">{{  date('F d, Y', strtotime($idea->date)) }}</li>
                     
                 </ul>
                 <div class="mt-auto">
@@ -54,10 +54,12 @@
             
             <div class="d-flex justify-content-between mt-4">
                 <ul class="ps-0 mb-0 comment-ul">
-                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spams()->count() }}</li>
-                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes()->count() }}</li>
+                    <li class="list-unstyled text-danger pe-4">Spams:{{ $idea->spams }}</li>
+                    <li class="list-unstyled text-primary pe-4">Votes:{{ $idea->votes }}</li>
+                    <li class="list-unstyled text-secondary pe-4">Status: <span class="text-success @if($idea->status != 'Open') text-red @endif">{{  $idea->status }}</span> </li>
+
                     <li class="list-unstyled text-secondary pe-4">{{ $idea->created_at->diffForHumans() }}</li>
-                    <li class="list-unstyled text-secondary pe-4">{{  date('F d, Y', strtotime($idea->date)) }}</li>
+                   
                     
                     
                 </ul>

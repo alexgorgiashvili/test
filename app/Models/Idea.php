@@ -18,13 +18,18 @@ class Idea extends Model
     const PAGINATION_COUNT = 10;
     
     protected $guarded = [];
-    protected $fillable = ['title', 'description', 'image'];
+    protected $fillable = ['title', 'description', 'image','search'];
     
     /**
     * Return the sluggable configuration array for this model.
     *
     * @return array
     */
+
+
+ 
+
+
     public function created_at_difference()
       {
           $now = Carbon::now();
@@ -66,8 +71,14 @@ class Idea extends Model
         
         public function status()
         {
-            return $this->belongsTo(Status::class);
+            return $this->belongsTo(Status::class,'statuses');
         }
+
+
+
+
+
+
         
         public function spam(User $user)
         {

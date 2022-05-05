@@ -6,6 +6,7 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
+                
                 <table id="dataTableExample" class="table">
                     <thead>
                         <tr>
@@ -23,9 +24,9 @@
                     </thead>
                     <tbody>
                         @foreach ($ideas as $idea)
-
+                        
                         {{-- Idea Type/1 --}}
-
+                        
                         @if($idea->idea_type == 1)
                         <tr>
                             <th>{{ $idea->id }}</th>
@@ -45,19 +46,19 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $idea->votes()->count() }}</td>
+                            <td>{{ $idea->votes }}</td>
                             <td>
-
+                                
                                 @if( $idea->votes()->where('type',1)->count() > $idea->votes()->where('type',2)->count())
                                 კი, პიტალოა
                                 @else
                                 არა, არაა პიტალო
                                 @endif
                             </td>
-                            <td>{{ $idea->spams()->count() }}</td>
+                            <td>{{ $idea->spams }}</td>
                             <td>
-                                <button class="btn bg-success rounded-pill text-white w-100 @if($idea->status->name != 'Open') bg-red @endif ">
-                                    @if($idea->status->name == 'Open')
+                                <button class="btn bg-success rounded-pill text-white w-100 @if($idea->status != 'Open') bg-red @endif ">
+                                    @if($idea->status== 'Open')
                                     აქტიური
                                     @else
                                     დასრულებული
@@ -71,15 +72,15 @@
                                 @else
                                 <span class="text-red fw-6">დასრულდა {{ $idea->created_at_difference() - 30 }} დღის წინ</span>
                                 @endif
-
-
+                                
+                                
                             </td>
                             <td><a href="{{ route('admin_view',$idea) }}"class="btn btn-primary">Edit</a></td>
                         </tr>
-
-
+                        
+                        
                         {{-- Idea Type/2 --}}
-
+                        
                         @else
                         <tr>
                             <th>{{ $idea->id }}</th>
@@ -99,7 +100,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $idea->votes()->count() }}</td>
+                            <td>{{ $idea->votes}}</td>
                             <td>
                                 @if( $idea->votes()->where('type',1)->count() > $idea->votes()->where('type',2)->count())
                                 {{ $idea->title }} პიტალოა
@@ -107,9 +108,9 @@
                                 {{ $idea->title_second }} პიტალოა
                                 @endif
                             </td>
-                            <td>{{ $idea->spams()->count() }}</td>
-                            <td><button class="btn bg-success rounded-pill text-white w-100 @if($idea->status->name != 'Open') bg-red @endif ">
-                                @if($idea->status->name == 'Open')
+                            <td>{{ $idea->spams}}</td>
+                            <td><button class="btn bg-success rounded-pill text-white w-100 @if($idea->status != 'Open') bg-red @endif ">
+                                @if($idea->status == 'Open')
                                 აქტიური
                                 @else
                                 დასრულებული
@@ -117,8 +118,8 @@
                             </button>
                         </td>
                         <td>{{ $idea->created_at->diffForHumans() }}</td>
-
-
+                        
+                        
                         <td>
                             @if ($idea->created_at_difference() <= 30)
                             <span class="text-success fw-6">დარჩა {{ $idea->created_at_difference() }} დღე</span>
@@ -128,10 +129,10 @@
                         </td>
                         <td><a href="{{ route('admin_view',$idea) }}"class="btn btn-primary">Edit</a></td>
                     </tr>
-
+                    
                     @endif
                     @endforeach
-
+                    
                 </tbody>
             </table>
         </div>

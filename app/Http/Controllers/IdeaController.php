@@ -76,6 +76,7 @@ class IdeaController extends Controller
         $survey->idea_type = 1;
         $survey->status_id = $status->id;
         $survey->votes = 0;
+        $survey->status = 'Open';
         $survey->user_id = auth()->id();
         $survey->description = $request->description;
         $survey->date = Date('Y-m-d');
@@ -155,6 +156,7 @@ class IdeaController extends Controller
             $survey->title = $request->title;
             $survey->title_second = $request->titletwo;
             $survey->status_id = $status->id;
+            $survey->status = 'Open';
             $survey->user_id = auth()->id();
             $survey->idea_type = 2;
             $survey->description = $request->description;

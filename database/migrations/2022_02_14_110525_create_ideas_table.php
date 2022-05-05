@@ -21,13 +21,14 @@ class CreateIdeasTable extends Migration
             $table->string('title_second')->nullable();
             $table->string('image');
             $table->string('image_second')->nullable();
-            $table->string('spams')->default(0);
+            $table->string('status')->nullable();
             $table->string('hide_name')->nullable();
             $table->integer('idea_type')->nullable();
             $table->string('slug')->nullable();
             $table->text('description'); 
             $table->string('date')->nullable();   
             $table->integer('votes')->default(0);
+            $table->integer('spams')->default(0);
 
             $table->timestamps();
         });

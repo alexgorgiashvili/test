@@ -2,25 +2,23 @@
 
 namespace App\Charts;
 
-use Carbon\Carbon;
-use App\Models\Idea;
+use App\Models\User;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 
-class testChart
+class UsersChart
 {
     protected $chart;
-    
+
     public function __construct(LarapexChart $chart)
     {
         $this->chart = $chart;
     }
-    
+
     public function build(): \ArielMejiaDev\LarapexCharts\AreaChart
     {
-
-        $day = [];
         $totalCount = [];
-        $ideas = Idea::whereMonth('created_at', now()->month)
+        $day = [];
+        $ideas = User::whereMonth('created_at', now()->month)
                     ->orderBy('created_at','asc')
                     ->get()
                     ->groupBy(function($item) {
@@ -31,7 +29,7 @@ class testChart
             $day[] = $key;
             $totalCount[] = $idea->count();
         } 
-
+        // dd($day); 
    
         return $this->chart->areaChart()
         ->setHeight(150)
@@ -45,10 +43,9 @@ class testChart
     }
     public function Year(): \ArielMejiaDev\LarapexCharts\AreaChart
     {
-
-        $day = [];
         $totalCount = [];
-        $ideas = Idea::whereYear('created_at', now()->year)
+        $day = [];
+        $ideas = User::whereYear('created_at', now()->year)
                     ->orderBy('created_at','asc')
                     ->get()
                     ->groupBy(function($item) {
@@ -59,7 +56,7 @@ class testChart
             $day[] = $key;
             $totalCount[] = $idea->count();
         } 
-         
+        // dd($day); 
    
         return $this->chart->areaChart()
         ->setHeight(150)

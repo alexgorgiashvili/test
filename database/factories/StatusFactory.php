@@ -13,8 +13,11 @@ class StatusFactory extends Factory
      */
     public function definition()
     {
+        static $id = 1;
+
         return [
-            'name' => $this->faker->title('Open'|'Closed') ,
+            'name' => $this->faker->randomElement(['Open', 'Closed']),
+            'id' => $id++
 
         ];
     }
